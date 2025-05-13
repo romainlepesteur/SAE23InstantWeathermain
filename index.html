@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,6 +14,17 @@
         <form id="weatherForm">
             <label for="postalCode">Code Postal :</label>
             <input type="text" id="postalCode" name="postalCode" required>
+            <script src="JAVA/recupinfoville.js"></script>
+            <label for="jourchoisis">Nombre de jours pour la prevision</label>
+            <select id="jourchoisis">
+                <option value="1">1 jour</option>
+                <option value="2">2 jour</option>
+                <option value="3">3 jour</option>
+                <option value="4">4 jour</option>
+                <option value="5">5 jour</option>
+                <option value="6">6 jour</option>
+                <option value="7">7 jour</option>
+            </select>
             <button type="submit">Rechercher</button>
         </form>
         <select id="citySelect" style="display:none;">
@@ -20,7 +32,7 @@
         </select>
         <div id="weatherInfo"></div>
     </div>
-    <script src="JAVA/recupinfoville.js"></script>
+    
     <script src="JAVA/recupinfometeo.js"></script>
 </body>
 </html>

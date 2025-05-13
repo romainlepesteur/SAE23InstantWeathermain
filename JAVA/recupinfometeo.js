@@ -24,14 +24,14 @@ function récupérerMétéo(codeCommune) {
 }
 
 // Fonction pour afficher les données météorologiques
-function afficherMétéo(données) {
+function afficherMétéo(données,joursprevis) {
     // Sélectionne l'élément avec l'ID 'weatherInfo'
     const infoMétéo = document.getElementById('weatherInfo');
 
-    // Récupère la prévision météo du jour actuel
-    const prévision = données.forecast[0];
+
 
     // Obtient la date actuelle
+    const prévisions = données.forecast.slice(0, joursprevis);
     const dateActuelle = new Date();
 
     // Options pour formater la date en français
@@ -40,12 +40,15 @@ function afficherMétéo(données) {
     // Formate la date actuelle en une chaîne lisible
     const dateFormatée = dateActuelle.toLocaleDateString('fr-FR', options);
 
-    // Met à jour le contenu HTML de l'élément 'weatherInfo' avec les données météo
-    infoMétéo.innerHTML = `
-        <h2>Météo pour ${données.city.name} le ${dateFormatée}</h2>
-        <p>Température minimale : ${prévision.tmin}°C</p>
-        <p>Température maximale : ${prévision.tmax}°C</p>
-        <p>Probabilité de pluie : ${prévision.probarain}%</p>
-        <p>Heures d'ensoleillement : ${prévision.sun_hours} heures</p>
-    `;
+    prévisions.forEach(prévision => {
+        contenuMétéo += `
+            <h3>${new Date(prévision.date).toLocaleDateString('fr-FR', options)}</h3>
+            <p>Température minimale : ${prévision.tmin}°C</p>
+            <p>Température maximale : ${prévision.tmax}°C</p>
+            <p>Probabilité de pluie : ${prévision.probarain}%</p>
+            <p>Heures d'ensoleillement : ${prévision.sun_hours} heures</p>
+        `;
+    });
+
+    infoMétéo.innerHTML = contenuMétéo;
 }
